@@ -1,25 +1,6 @@
 :root {
-    --color-fondo: #d2e4f1;
     --color-contenedor: #bcd3e6;
     --color-tarjeta: rgba(255, 255, 255, 0.85);
-    --texto-principal: #1e293b;
-    --texto-atenuado: #64748b;
-    --azul-acento: #3b82f6;
-    --estado-verde: #22c55e;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', Arial, sans-serif;
-}
-/* ==========================================================================
-   VARIABLES Y CONFIGURACIÓN BASE
-   ========================================================================== */
-:root {
-    --color-fondo-neutro: #f1f5f9;  /* Gris limpio para el fondo de la pantalla */
-    --color-contenedor: #e2e8f0;    /* Gris medio para el contenedor de la app */
     --texto-principal: #1e293b;
     --texto-atenuado: #64748b;
     --azul-acento: #3b82f6;
@@ -35,23 +16,25 @@
 
 body {
     min-height: 100vh;
-    background-color: var(--color-fondo-neutro);
+    background-color: #d2e4f1; 
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
     color: var(--texto-principal);
+    position: relative;
 }
 
-/* Contenedor Principal de la App */
 .contenedor-principal {
     width: 100%;
     max-width: 550px;
     background-color: var(--color-contenedor);
-    border: 2px solid #cbd5e1;
+    border: 2px solid #a3c4dc;
     border-radius: 16px;
     padding: 24px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 1; /* Esto hace que flote ARRIBA del fondo del clima */
 }
 
 .contenedor-principal h1 {
@@ -62,7 +45,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Caja/Grupo de Búsqueda */
 .grupo_busqueda {
     display: flex;
     background: #ffffff;
@@ -113,14 +95,34 @@ body {
     color: white;
 }
 
-/* ==========================================================================
-   ESTRUCTURA DE LA TARJETA DINÁMICA
-   ========================================================================== */
+#informacion_Clima_Div::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -10;
+    pointer-events: none;
+    transition: background-color 0.4s ease;
+}
+
+#informacion_Clima_Div.clima-calido::before {
+    background-color: #fde047; 
+}
+
+#informacion_Clima_Div.clima-frio::before {
+    background-color: #7dd3fc; 
+}
+
 .tarjeta-clima {
+    background: var(--color-tarjeta);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-radius: 12px;
+    border: 1px solid rgba(203, 213, 225, 0.7);
     overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -129,10 +131,11 @@ body {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
-/* Encabezado */
 .cabecera-tarjeta {
+    background: rgba(248, 250, 252, 0.65);
     padding: 14px;
     text-align: center;
+    border-bottom: 1px solid #e2e8f0;
     position: relative;
 }
 
@@ -151,12 +154,12 @@ body {
     font-weight: 500;
 }
 
-/* Cuerpo de datos principales */
 .cuerpo-tarjeta-principal {
     padding: 20px;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    border-bottom: 1px solid #e2e8f0;
 }
 
 .informacion-visual {
@@ -169,13 +172,11 @@ body {
     margin-bottom: 2px;
 }
 
-/* Animación de flotación infinita para el icono */
 .imagen-icono-clima {
     width: 70px;
     height: 70px;
     display: block;
     margin: 0 auto;
-    animation: flotarIcono 3s ease-in-out infinite;
 }
 
 .informacion-datos {
@@ -195,10 +196,10 @@ body {
     margin: 4px 0;
 }
 
-/* Cuadrícula o Grid Inferior de Detalles */
 .cuadricula-detalles {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .elemento-cuadricula {
@@ -206,6 +207,16 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.elemento-cuadricula:nth-child(odd) {
+    border-right: 1px solid #f1f5f9;
+}
+
+.elemento-cuadricula:nth-child(3), 
+.elemento-cuadricula:nth-child(4) {
+    border-bottom: none;
 }
 
 .icono-elemento {
@@ -223,116 +234,21 @@ body {
     font-weight: 500;
 }
 
-/* ==========================================================================
-   PALETAS DE COLORES (ASIGNACIÓN DIRECTA)
-   ========================================================================== */
-
-/* DISEÑO DE CALOR POR DEFECTO (Amarillo Cálido) */
-.tarjeta-clima {
-    border: 1px solid #fde047;
-    box-shadow: 0 4px 12px rgba(234, 179, 8, 0.05);
-}
-.tarjeta-clima .cabecera-tarjeta {
-    background: rgba(254, 249, 195, 0.8);
-    border-bottom: 1px solid #fef08a;
-}
-.tarjeta-clima .cuerpo-tarjeta-principal {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(254, 249, 195, 0.4) 100%);
-    border-bottom: 1px solid #fef08a;
-}
-.tarjeta-clima .cuadricula-detalles {
-    background: rgba(254, 249, 195, 0.5);
-}
-.tarjeta-clima .elemento-cuadricula {
-    border-bottom: 1px solid #fef08a;
-}
-.tarjeta-clima .elemento-cuadricula:nth-child(odd) {
-    border-right: 1px solid #fef08a;
-}
-.tarjeta-clima .elemento-cuadricula:nth-child(3), 
-.tarjeta-clima .elemento-cuadricula:nth-child(4) {
-    border-bottom: none;
-}
-
-/* DISEÑO DE FRÍO (Activo únicamente si decides usar la clase "clima-frio" en JS) */
-.tarjeta-clima.clima-frio {
-    border: 1px solid #93c5fd;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.05);
-}
-.tarjeta-clima.clima-frio .cabecera-tarjeta {
-    background: rgba(224, 242, 254, 0.8);
-    border-bottom: 1px solid #bae6fd;
-}
-.tarjeta-clima.clima-frio .cuerpo-tarjeta-principal {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(224, 242, 254, 0.4) 100%);
-    border-bottom: 1px solid #bae6fd;
-}
-.tarjeta-clima.clima-frio .cuadricula-detalles {
-    background: rgba(224, 242, 254, 0.5);
-}
-.tarjeta-clima.clima-frio .elemento-cuadricula {
-    border-bottom: 1px solid #bae6fd;
-}
-.tarjeta-clima.clima-frio .elemento-cuadricula:nth-child(odd) {
-    border-right: 1px solid #bae6fd;
-}
-.tarjeta-clima.clima-frio .elemento-cuadricula:nth-child(3), 
-.tarjeta-clima.clima-frio .elemento-cuadricula:nth-child(4) {
-    border-bottom: none;
-}
-
-/* ==========================================================================
-   ANIMACIONES (KEYFRAMES)
-   ========================================================================== */
-.animacion-aparecer {
-    animation: entradaSuave 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes entradaSuave {
-    from { 
-        opacity: 0; 
-        transform: translateY(12px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
-}
-
-@keyframes flotarIcono {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-}
-
-/* Estilo de contingencia para errores en el DOM */
-#informacion_Clima_Div p {
+#informacion_Clima_Div > p {
     text-align: center;
     padding: 14px;
-    background: #fef2f2;
-    border: 1px solid #fee2e2;
-    border-radius: 8px;
-    color: #ef4444 !important;
-    font-weight: 500;
+    color: red;
 }
 
-/* ==========================================================================
-   AJUSTES MÓVILES RESPONSIVOS
-   ========================================================================== */
 @media (max-width: 480px) {
     .cuadricula-detalles {
         grid-template-columns: 1fr;
     }
-    .tarjeta-clima .elemento-cuadricula:nth-child(odd),
-    .tarjeta-clima.clima-frio .elemento-cuadricula:nth-child(odd) {
+    .elemento-cuadricula:nth-child(odd) {
         border-right: none;
     }
-    .tarjeta-clima .elemento-cuadricula,
-    .tarjeta-clima.clima-frio .elemento-cuadricula {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    .tarjeta-clima .elemento-cuadricula:last-child,
-    .tarjeta-clima.clima-frio .elemento-cuadricula:last-child {
-        border-bottom: none;
+    .elemento-cuadricula {
+        border-bottom: 1px solid #f1f5f9;
     }
     .cuerpo-tarjeta-principal {
         flex-direction: column;
