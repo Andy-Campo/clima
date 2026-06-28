@@ -1,0 +1,264 @@
+:root {
+    --color-fondo: #d2e4f1;
+    --color-contenedor: #bcd3e6;
+    --color-tarjeta: #ffffff;
+    --texto-principal: #1e293b;
+    --texto-atenuado: #64748b;
+    --azul-acento: #3b82f6;
+    --estado-verde: #22c55e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--color-fondo);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: var(--texto-principal);
+}
+
+/* contenedor-principal */
+.contenedor-principal {
+    width: 100%;
+    max-width: 550px;
+    background-color: var(--color-contenedor);
+    border: 2px solid #a3c4dc;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* Encabezado */
+.encabezado-app {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.encabezado-app h1 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.icono-decorativo {
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
+/* Busqueda Centralizada */
+.caja-busqueda {
+    display: flex;
+    background: var(--color-tarjeta);
+    border-radius: 8px;
+    padding: 4px;
+    border: 1px solid #94a3b8;
+    margin-bottom: 24px;
+}
+
+#entrada-ciudad {
+    flex: 1;
+    border: none;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    outline: none;
+    color: var(--texto-principal);
+    background: transparent;
+}
+
+#boton-buscar {
+    background: var(--azul-acento);
+    border: none;
+    border-radius: 6px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: white;
+    transition: background 0.2s;
+}
+
+#boton-buscar:hover {
+    background: #2563eb;
+}
+
+/* Tarjeta de Resultado (tarjeta-clima) */
+.tarjeta-clima {
+    background: var(--color-tarjeta);
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.tarjeta-inicial {
+    padding: 40px;
+    text-align: center;
+    color: var(--texto-atenuado);
+    font-style: italic;
+}
+
+/* Encabezado de tarjeta */
+.cabecera-tarjeta {
+    background: #f8fafc;
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+    position: relative;
+}
+
+.cabecera-tarjeta h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.etiqueta-estado {
+    position: absolute;
+    right: 14px;
+    top: 18px;
+    font-size: 0.75rem;
+    color: var(--estado-verde);
+    font-weight: 500;
+}
+
+/* Bloque del Reporte Principal */
+.cuerpo-tarjeta-principal {
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.informacion-visual {
+    text-align: center;
+}
+
+.codigo-icono {
+    font-size: 0.8rem;
+    color: var(--texto-atenuado);
+    margin-bottom: 2px;
+}
+
+.imagen-icono-clima {
+    width: 70px;
+    height: 70px;
+    display: block;
+    margin: 0 auto;
+}
+
+.informacion-datos {
+    text-align: left;
+}
+
+.texto-descripcion {
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.temperatura-principal {
+    font-size: 2.2rem;
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 4px 0;
+}
+
+.informacion-secundaria {
+    font-size: 0.8rem;
+    color: var(--texto-atenuado);
+}
+
+/* Cuadrícula de Detalles de la Tarjeta */
+.cuadricula-detalles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #ffffff;
+}
+
+.elemento-cuadricula {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+/* Bordes divisorios internos */
+.elemento-cuadricula:nth-child(odd) {
+    border-right: 1px solid #f1f5f9;
+}
+
+.elemento-cuadricula:nth-child(3), .elemento-cuadricula:nth-child(4) {
+    border-bottom: none;
+}
+
+.icono-elemento {
+    font-size: 1.4rem;
+}
+
+.texto-elemento p {
+    font-size: 0.8rem;
+    color: var(--texto-atenuado);
+}
+
+.texto-elemento strong {
+    font-size: 0.95rem;
+    color: var(--texto-principal);
+}
+
+.mensaje-error {
+    padding: 20px;
+    text-align: center;
+    color: #ef4444;
+    font-weight: 500;
+}
+
+/* Animación sutil de carga */
+.animacion-aparecer {
+    animation: entradaSuave 0.4s ease-in-out;
+}
+
+@keyframes entradaSuave {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Diseño Responsivo Básico */
+@media (max-width: 480px) {
+    .cuadricula-detalles {
+        grid-template-columns: 1fr;
+    }
+    .elemento-cuadricula:nth-child(odd) {
+        border-right: none;
+    }
+    .elemento-cuadricula {
+        border-bottom: 1px solid #f1f5f9;
+    }
+    .cuerpo-tarjeta-principal {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    .informacion-datos {
+        text-align: center;
+    }
+    .etiqueta-estado {
+        position: static;
+        margin-top: 4px;
+        display: block;
+    }
+}
