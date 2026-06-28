@@ -56,11 +56,20 @@ buscarclimabtn.addEventListener("click", () =>
         const latitud = datos.coord.lat;
         const longitud = datos.coord.lon;
 
+        // NUEVO: Evaluamos la temperatura para decidir qué clase de CSS aplicar
+        let claseClima = "clima-templado"; // Por defecto entre 15°C y 24°C
+        if (temperatura > 24) {
+            claseClima = "clima-calido";   // Mayor a 24°C
+        } else if (temperatura < 15) {
+            claseClima = "clima-frio";     // Menor a 15°C
+        }
+
         const urlIcono = `https://openweathermap.org/img/wn/${codigoIcono}@2x.png`;
 
         informacionClimaDiv.innerHTML = 
         `        
-            <div class="tarjeta-clima animacion-aparecer">
+            <!-- NUEVO: Agregamos la variable ${claseClima} a la lista de clases -->
+            <div class="tarjeta-clima ${claseClima} animacion-aparecer">
                 <!-- Encabezado de la Tarjeta -->
                 <div class="cabecera-tarjeta">
                     <h2>${ciudad}, ${pais}</h2>
@@ -75,7 +84,7 @@ buscarclimabtn.addEventListener("click", () =>
                     </div>
                     <div class="informacion-datos">
                         <div class="texto-descripcion">${descripcion}</div>
-                        <div class="temperatura-principal">${temperatura}°C</div>
+                        <div class="temperatura-principal">${Math.round(temperatura)}°C</div>
                     </div>
                 </div>
                 
