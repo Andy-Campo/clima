@@ -55,6 +55,7 @@ buscarclimabtn.addEventListener("click", () =>
         const nubes = datos.clouds.all;
         const latitud = datos.coord.lat;
         const longitud = datos.coord.lon;
+        const fecha = new Date(datos.dt * 1000); 
 
         // NUEVO: Evaluamos la temperatura para decidir qué clase de CSS aplicar
         let claseClima = "clima-templado"; // Por defecto entre 15°C y 24°C
@@ -81,7 +82,19 @@ buscarclimabtn.addEventListener("click", () =>
                 <!-- Encabezado de la Tarjeta -->
                 <div class="cabecera-tarjeta">
                     <h2>${ciudad}, ${pais}</h2>
-                    <span class="etiqueta-estado">Status: 200 OK</span>
+                    <span class="etiqueta-estado">
+                        Status: 200 OK
+                    </span>
+                    <span class=long-lat>
+                        <strong>
+                            Longitud: 
+                        </strong>
+                        ${longitud.toFixed(2)},
+                        <strong>
+                            Latitud: 
+                        </strong>
+                        ${latitud.toFixed(2)}
+                    </span>
                 </div>
                 
                 <!-- Cuerpo Principal -->
