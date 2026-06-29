@@ -49,7 +49,7 @@ buscarclimabtn.addEventListener("click", () =>
         const temperatura = datos.main.temp;
         const descripcion = datos.weather[0].description;
         const humedad = datos.main.humidity;
-        const viento = datos.wind.speed;
+        const viento = datos.wind.speed*18/5;
         const codigoIcono = datos.weather[0].icon;
         const presion = datos.main.pressure;
         const nubes = datos.clouds.all;
@@ -60,8 +60,16 @@ buscarclimabtn.addEventListener("click", () =>
         let claseClima = "clima-templado"; // Por defecto entre 15°C y 24°C
         if (temperatura > 24) {
             claseClima = "clima-calido";   // Mayor a 24°C
+            document.body.style.backgroundColor = "rgb(255, 179, 102)";
+            document.getElementById("contenedor-principal").style.backgroundColor = "rgba(255, 255, 255, 0.8)";
+
         } else if (temperatura < 15) {
             claseClima = "clima-frio";     // Menor a 15°C
+            document.body.style.backgroundColor = "lightblue";
+            document.getElementById("contenedor-principal").style.backgroundColor = "rgba(255, 255, 255, 0.8)";
+        } else {
+            document.body.style.backgroundColor = "lightgreen";
+            document.getElementById("contenedor-principal").style.backgroundColor = "rgba(255, 255, 255, 0.8)";
         }
 
         const urlIcono = `https://openweathermap.org/img/wn/${codigoIcono}@2x.png`;
@@ -105,7 +113,7 @@ buscarclimabtn.addEventListener("click", () =>
                     <div class="elemento-cuadricula">
                         <span class="icono-elemento">💨</span>
                         <div class="texto-elemento">
-                            <p>Viento: ${viento} m/s</p>
+                            <p>Viento: ${Math.round(viento)} km/h</p>
                         </div>
                     </div>
                     <div class="elemento-cuadricula">
